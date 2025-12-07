@@ -1,0 +1,269 @@
+/* --- MUJI Style --- */
+
+:root {
+  --background-color: #ffffff !important;
+  --card-background-color: #ffffff !important;
+  --color: #1a1a1a !important;
+  --h1-color: #1a1a1a !important;
+  --h2-color: #1a1a1a !important;
+  --h3-color: #1a1a1a !important;
+  --h4-color: #1a1a1a !important;
+  --muted-color: #757575 !important;
+  --muted-border-color: #e5e5e5 !important;
+  --primary: #7F0019 !important; /* Muji Red */
+  
+  --muji-red: #7F0019;          
+  --muji-red-dark: #5a0011;     
+  --muji-black: #1a1a1a;        
+  --muji-grey: #757575;         
+  --muji-light-grey: #F2F2F2;   
+  --muji-border: #E5E5E5;
+
+  --border-radius: 0px; 
+  --block-spacing-vertical: 2rem;
+}
+
+::selection {
+  background: var(--muji-black) !important;
+  color: white !important;
+}
+
+*:focus {
+  outline: 1px solid var(--muji-black) !important;
+  outline-offset: 2px;
+  box-shadow: none !important;
+}
+
+body {
+  background-color: #ffffff !important;
+  color: var(--muji-black) !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+main {
+  background-color: #ffffff !important;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+h1, h2, h3, h4 {
+  color: var(--muji-black) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: transparent !important;
+}
+
+a {
+  color: var(--muji-black);
+  text-decoration: underline;
+  text-decoration-color: #CCC;
+  text-underline-offset: 4px;
+  transition: all 0.2s;
+}
+
+a:hover {
+  color: var(--muji-red);
+  text-decoration-color: var(--muji-red);
+}
+
+.authOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 4px solid var(--muji-red);
+  padding-bottom: 2rem;
+  margin-bottom: 4rem;
+  background-color: white !important;
+}
+
+.authOptions h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.authOptions a[role="button"] {
+  background: var(--muji-black) !important;
+  color: white !important;
+  border: 1px solid var(--muji-black) !important;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.authOptions a[role="button"]:hover {
+  background: var(--muji-red) !important;
+  border-color: var(--muji-red) !important;
+}
+
+article {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--muji-border) !important;
+  padding: 2.5rem 0;
+  margin: 0;
+  box-shadow: none !important;
+  color: var(--muji-black) !important;
+}
+
+article header, 
+article footer {
+  background-color: transparent !important;
+  color: var(--muji-black) !important;
+  border: none !important;
+  margin-bottom: 1rem;
+  padding: 0 !important;
+}
+
+article header h2, article header strong {
+  font-size: 1.4rem;
+  display: inline-block;
+}
+
+article small {
+  font-family: "Courier New", Courier, monospace;
+  color: var(--muji-grey) !important;
+  font-size: 0.85rem;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+article small a {
+  background-color: var(--muji-light-grey) !important;
+  color: var(--muji-black) !important;
+  padding: 2px 8px;
+  border: none;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+article small a:hover {
+  background-color: var(--muji-black) !important;
+  color: white !important;
+}
+
+input, textarea, select {
+  background-color: #ffffff !important;
+  border: 1px solid #CCC !important;
+  border-radius: 0 !important;
+  color: var(--muji-black) !important;
+  box-shadow: none !important;
+  padding: 1rem;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--muji-black) !important;
+  outline: none !important;
+}
+
+label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--muji-black) !important;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+
+button, 
+input[type="submit"],
+a[role="button"],
+[role="button"] {
+  background-color: var(--muji-red) !important;
+  border: 1px solid var(--muji-red) !important;
+  color: white !important;
+  border-radius: 0 !important;
+  font-weight: 700;
+  padding: 0.8rem 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  transition: opacity 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button:hover, 
+input[type="submit"]:hover,
+a[role="button"]:hover,
+[role="button"]:hover {
+  background-color: var(--muji-red-dark) !important;
+  border-color: var(--muji-red-dark) !important;
+  opacity: 1;
+}
+
+button.secondary, 
+button.outline, 
+a.secondary, 
+a.outline, 
+[role="button"].secondary, 
+[role="button"].outline {
+  background-color: #ffffff !important;
+  color: var(--muji-black) !important;
+  border: 1px solid #CCC !important;
+}
+
+button.secondary:hover, 
+button.outline:hover, 
+a.secondary:hover, 
+a.outline:hover, 
+[role="button"].secondary:hover, 
+[role="button"].outline:hover {
+  border-color: var(--muji-black) !important;
+  color: #ffffff !important;
+  background-color: var(--muji-black) !important;
+}
+
+button.contrast, a.contrast {
+    background-color: var(--muji-black) !important;
+    border-color: var(--muji-black) !important;
+    color: white !important;
+}
+button.contrast:hover, a.contrast:hover {
+    background-color: #000 !important;
+    border-color: #000 !important;
+}
+
+.vote-container strong, 
+.container > div > strong {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--muji-black) !important;
+    margin-right: 15px;
+}
+
+
+section {
+    margin-top: 4rem !important;
+    padding-top: 2rem !important;
+    border-top: 1px solid var(--muji-border) !important;
+    display: block;
+    clear: both;
+}
+
+section h3 {
+    margin-top: 0 !important;
+    margin-bottom: 2rem !important;
+    font-size: 1.2rem !important;
+}
+
+article footer {
+    margin-bottom: 0 !important;
+    padding-bottom: 1rem !important;
+    position: relative;
+    z-index: 1;
+}

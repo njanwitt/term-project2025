@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css"
+    />
+    <link href="/css/style.css" rel="stylesheet" />
+    <title><%= post.title %></title>
+  </head>
+  <body>
+    <main>
+      <div class="authOptions">
+        <h1>View Post</h1>
+        <a role="button" href="/posts">Home</a>
+      </div>
+
+      <div class="container">
+        <article>
+          <header>
+            <hgroup>
+                <h2><%= post.title %></h2>
+                <h3>
+                    Posted by <%= post.creator.uname %> 
+                    in <a href="/subs/show/<%= post.subgroup %>"><%= post.subgroup %></a>
+                </h3>
+            </hgroup>
+            <small><%= new Date(post.timestamp).toLocaleString() %></small>
+          </header>
+
+          <p><%= post.description %></p>
+          
+          <% if (post.link) { %>
+            <footer>
+                <strong>Link:</strong> <a href="<%= post.link %>" target="_blank"><%= post.link %></a>
+            </footer>
+          <% } %>
+
+          <footer style="margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                  
+                  <div style="display: flex; gap: 10px; align-items: center;" class="vote-container">
+                    <% 
+                       let voteCount = 0;
+                       post.votes.forEach(v => voteCount += v.value);
+                       
+                       let userVote = 0;
+                       if (typeof user !== 'undefined' && user) {
+                         const v = post.votes.find(v => v.user_id === user.id);
+                         if (v) userVote = v.value;
+                       }
+                    %>
+                    <strong id="vote-count-<%= post.id %>">Votes: <%= voteCount %></strong>
+
+                    <% if (typeof user !== 'undefined' && user) { %>
+                        <form action="/posts/vote/<%= post.id %>" method="POST" style="margin:0;">
+                            <input type="hidden" name="setvoteto" value="1">
+                            <button type="submit" 
+                                    style="padding: 5px 15px; font-size: 0.8rem;" 
+                                    class="<%= userVote === 1 ? '' : 'outline' %>">
+                                Up
+                            </button>
+                        </form>
+
+                        <form action="/posts/vote/<%= post.id %>" method="POST" style="margin:0;">
+                            <input type="hidden" name="setvoteto" value="-1">
+                            <button type="submit" 
+                                    style="padding: 5px 15px; font-size: 0.8rem;"
+                                    class="<%= userVote === -1 ? '' : 'outline' %>">
+                                Down
+                            </button>
+                        </form>
+                    <% } %>
+                  </div>
+
+                  <% if (typeof user !== 'undefined' && user && user.id === post.creator.id) { %>
+                    <div role="group">
+                        <a href="/posts/edit/<%= post.id %>" role="button" class="secondary outline">Edit</a>
+                        <a href="/posts/deleteconfirm/<%= post.id %>" role="button" class="contrast outline">Delete</a>
+                    </div>
+                  <% } %>
+              </div>
+          </footer>
+        </article>
+
+        <section>
+            <h3>Comments</h3>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <article>
+                    <form action="/posts/comment-create/<%= post.id %>" method="POST">
+                        <label for="comment">Leave a comment</label>
+                        <textarea name="description" id="comment" placeholder="What are your thoughts?" required></textarea>
+                        <button type="submit">Post Comment</button>
+                    </form>
+                </article>
+            <% } else { %>
+                <p><em><a href="/auth/login">Login</a> to leave a comment.</em></p>
+            <% } %>
+
+            <% post.comments.forEach(comment => { %>
+                <article>
+                    <header style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong><%= comment.creator.uname %></strong> 
+                            <small>• <%= new Date(comment.timestamp).toLocaleDateString() %></small>
+                        </div>
+                        <% if (typeof user !== 'undefined' && user && user.id === comment.creator.id) { %>
+                            <div style="font-size: 0.8rem;">
+                                <a href="/comments/edit/<%= comment.id %>">Edit</a> | 
+                                <a href="/comments/deleteconfirm/<%= comment.id %>" style="color: red;">Delete</a>
+                            </div>
+                        <% } %>
+                    </header>
+                    <p><%= comment.description %></p>
+                </article>
+            <% }) %>
+        </section>
+      </div>
+    </main>
+    <script src="/js/voting.js"></script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css"
+    />
+    <link href="/css/style.css" rel="stylesheet" />
+    <title><%= (typeof post !== 'undefined') ? 'Edit Post' : 'Create Post' %></title>
+  </head>
+  <body>
+    <main>
+      <div class="authOptions">
+        <h1><%= (typeof post !== 'undefined') ? 'Edit Post' : 'Create New Post' %></h1>
+        <a role="button" href="/posts">Home</a>
+      </div>
+
+      <div class="container">
+        <form action="<%= (typeof post !== 'undefined') ? '/posts/edit/' + post.id : '/posts/create' %>" method="POST">
+          
+          <label for="title">Title</label>
+          <input 
+            type="text" 
+            name="title" 
+            id="title" 
+            placeholder="Enter post title" 
+            value="<%= (typeof post !== 'undefined') ? post.title : '' %>" 
+            required 
+          />
+
+          <label for="link">Link (Optional)</label>
+          <input 
+            type="url" 
+            name="link" 
+            id="link" 
+            placeholder="http://" 
+            value="<%= (typeof post !== 'undefined' && post.link) ? post.link : '' %>"
+          />
+
+          <label for="description">Description</label>
+          <textarea 
+            name="description" 
+            id="description" 
+            placeholder="Let's talk!" 
+            required
+          ><%= (typeof post !== 'undefined') ? post.description : '' %></textarea>
+
+          <label for="subgroup">Subgroup</label>
+          <input 
+            type="text" 
+            name="subgroup" 
+            id="subgroup" 
+            placeholder="e.g. general, coding, news" 
+            value="<%= (typeof post !== 'undefined') ? post.subgroup : '' %>" 
+            required 
+          />
+
+          <button type="submit">
+            <%= (typeof post !== 'undefined') ? 'Update Post' : 'Submit Post' %>
+          </button>
+          
+          <% if (typeof post !== 'undefined') { %>
+            <a role="button" href="/posts/show/<%= post.id %>" class="secondary outline" style="margin-left: 10px;">Cancel</a>
+          <% } else { %>
+            <a role="button" href="/posts" class="secondary outline" style="margin-left: 10px;">Cancel</a>
+          <% } %>
+
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

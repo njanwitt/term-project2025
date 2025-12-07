@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css"
+    />
+    <link href="/css/style.css" rel="stylesheet" />
+    <title>Edit Comment</title>
+  </head>
+  <body>
+    <main>
+        <div class="container">
+            <h1>Edit Comment</h1>
+            <form action="/comments/edit/<%= comment.id %>" method="POST">
+                <label for="description">Comment</label>
+                <textarea name="description" id="description" required><%= comment.description %></textarea>
+                <button type="submit">Update Comment</button>
+            </form>
+            <a href="/posts/show/<%= comment.postId %>">Cancel</a>
+        </div>
+    </main>
+  </body>
+</html>

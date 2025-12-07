@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css"
+    />
+    <link href="/css/style.css" rel="stylesheet" />
+    <title><%= subName %></title>
+  </head>
+  <body>
+    <main>
+      <div class="authOptions">
+        <h1>Subgroup: <%= subName %></h1>        
+      <div>
+            <a role="button" href="/subs/list" class="secondary">Back to Subs</a>
+            <a role="button" href="/posts">Home</a>
+        </div>
+      </div>
+
+      <div class="container">
+        <div style="margin-bottom: 3rem">
+            <strong>Sort By: </strong>
+            <% if (typeof orderBy !== 'undefined' && orderBy === 'votes') { %>
+                <a href="?orderby=date" class="secondary outline" role="button" style="padding: 5px 10px; font-size: 0.8rem;">New</a>
+                <a href="?orderby=votes" role="button" style="padding: 5px 10px; font-size: 0.8rem;">Top</a>
+            <% } else { %>
+                <a href="?orderby=date" role="button" style="padding: 5px 10px; font-size: 0.8rem;">New</a>
+                <a href="?orderby=votes" class="secondary outline" role="button" style="padding: 5px 10px; font-size: 0.8rem;">Top</a>
+            <% } %>
+        </div>
+
+        <% if (posts.length === 0) { %>
+          <article>
+            <p>No posts here yet!</p>
+            <p>Be the first to <a href="/posts/create">create a post</a> in this subgroup.</p>
+          </article>
+        <% } %>
+        
+        <% posts.forEach(post => { %>
+          <article>
+            <header>
+                <a href="/posts/show/<%=post.id%>"><strong><%= post.title %></strong></a>
+                <br>
+                <small>
+                    Posted by <%= post.creator ? post.creator.uname : 'Unknown' %> 
+                    • <%= new Date(post.timestamp).toLocaleDateString() %>
+                </small>
+            </header>
+            <p><%= post.description %></p>
+            <% if (post.link) { %>
+                <footer>
+                    <a href="<%= post.link %>" target="_blank">Visit Link &rarr;</a>
+                </footer>
+            <% } %>
+          </article>
+        <% }) %>
+      </div>
+    </main>
+  </body>
+</html>
