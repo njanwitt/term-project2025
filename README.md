@@ -1,4 +1,4 @@
-# Term Assignment (with customixed theme for CSS)
+# Term Assignment (with customized theme for CSS)
 
 ## Introduction
 
