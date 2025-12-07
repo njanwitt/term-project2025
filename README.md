@@ -1,4 +1,4 @@
-# Term Assignment
+# Term Assignment (using Muji theme for CSS)
 
 ## Introduction
 
